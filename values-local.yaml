@@ -1,26 +1,35 @@
-# Setup your replica count!
+
+# HPA values
 autoscaling:
-  enabled: true
+  enabled: false
   minReplicas:
     ui: 1
     api: 1
     notification: 0
     poller: 0
+    default: 1
+  maxReplicas:
+    ui: 3
+    api: 3
+    notification: 3
+    poller: 1
+  targetCPUUtilizationPercentage: 90
+  targetMemoryUtilizationPercentage: 90
+  healthApiPath: /health-checker
 
 limitRange:
   enabled: true
   limits:
     - max:
-        cpu: '1'
-        memory: 2Gi
+        cpu: "1"
+        memory: 2.5Gi
       default:
-        cpu: '1'
-        memory: 2Gi
+        cpu: "1"
+        memory: 2.5Gi
       defaultRequest:
-        cpu: '1'
-        memory: 2Gi
+        cpu: "1"
+        memory: 2.5Gi
       type: Container
-
 
 # Where are your images?
 image:
@@ -39,7 +48,7 @@ service:
   type: ClusterIP
 
 ingress:
-  enabled: true
+  className: nginx
   hosts:
   - nephele.qtest.local
   - qtestdev1.qtest.local
@@ -47,7 +56,7 @@ ingress:
   - secretName: qtest-tls-secret
     hosts:
     - nephele.qtest.local
-  annotations: null
+    - qtestdev1.qtest.local
 
 # qTest Manager
 qTestManager:
@@ -59,6 +68,8 @@ qTestManager:
       postgresReadOnlyUrl: jdbc:postgresql://host.docker.internal/qTest
       postgresReadOnlyUserName: postgres
       postgresReadOnlyPassword: cG9zdGdyZXM=
+  mail:
+    password: cG9zdGdyZXM=
   notification:
     urlExternal: https://nephele.qtest.local
   preUrl: http://<sitename>.qtest.local
@@ -66,10 +77,15 @@ qTestManager:
   attachmentFolderPath: /mnt/data/qtest/attachments
   licenseFolderPath: /mnt/data/qtest/license
 
-# Turn off persistence
-persistence:
+ingressClass:
   enabled: false
+  controller: k8s.io/ingress-nginx
 
 testconductor:
   environment:
-    isOnPremise: true
+    isOnPremise: false
+
+persistence:
+  existingClaim: qtest-onpremise-pvc
+  accessMode: ReadWriteOnce
+  size: 10Gi
