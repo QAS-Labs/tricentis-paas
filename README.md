@@ -71,4 +71,11 @@ testconductor:
     - docker cp license.lic kind-worker2:/mnt
 * Login to kind worker and create directory /mnt/data/qtest/attachments and /mnt/data/qtest/license
 * Move the license from /mnt directory to /mnt/data/qtest/license
+
+## Guide to run a single instance
+<pre>
+testconductor:
+  environment:
+    isOnPremise: false
+    singleInstance: true
 </pre>

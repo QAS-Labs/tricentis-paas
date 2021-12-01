@@ -84,8 +84,8 @@ ingressClass:
 testconductor:
   environment:
     isOnPremise: false
+    singleInstance: false
 
 persistence:
-  existingClaim: qtest-onpremise-pvc
   accessMode: ReadWriteOnce
   size: 10Gi
