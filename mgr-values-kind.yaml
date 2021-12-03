@@ -2,10 +2,10 @@
 qTestManager:
   client:
     jdbc:
-      postgresUrl: jdbc:postgresql://192.168.1.17/qTest
+      postgresUrl: jdbc:postgresql:/host.docker.internal/qTest
       postgresUserName: postgres
       postgresPassword: cG9zdGdyZXM=
-      postgresReadOnlyUrl: jdbc:postgresql://192.168.1.17/qTest
+      postgresReadOnlyUrl: jdbc:postgresql://host.docker.internal/qTest
       postgresReadOnlyUserName: postgres
       postgresReadOnlyPassword: cG9zdGdyZXM=
   mail:
@@ -53,7 +53,7 @@ qTestManager:
     sharedBucket: "qtest"
   s3:
     folder: qtest/manager
-    scanUrl: https://clamav-13.container-dev.qtestdev.com
+    scanUrl: https://clamav-13.qtest.local
     accessKey: ""
     secretKey: ""
 
