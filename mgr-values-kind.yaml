@@ -14,6 +14,13 @@ qTestManager:
     userName: "qtest"
     password: cG9zdGdyZXM=
     supportEmailAddress: supports@tricentis.com
+  elasticSearch:
+    init: false
+    disable: false
+    scheme: http
+    host: elasticsearch.local
+    port: 9200
+    permittedClients: ""
   notification:
     urlExternal: https://nephele.qtest.local
   preUrl: http://<sitename>.qtest.local
