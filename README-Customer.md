@@ -13,7 +13,7 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 ## Clone this repo
 <code>git clone git@github.com:QAS-Labs/qtest-paas</code>
 
-## qTest Manager parameters to change in values-local.yaml
+## qTest Manager parameters to change in mgr-values-kind.yaml
 
 
 | Parameter                   | Description                                          | Default |
@@ -85,16 +85,15 @@ helm repo update
 ```
 Install the qTest Manager chart with the release name `qtest-manager` in `qtest` namespace:
 ```bash
-helm install qtest-manager qtest/qtest-mgr -f mgr-values-kind.yaml -n qtest --create-namespace
+helm install qtest-manager -f mgr-values-kind.yaml -n qtest --create-namespace
 ```
 Note that qTest Manager chart should be the __first__ chart to be installed.
 All other qTest charts may be installed subsequently in the similar manner.  For example, to install qTest Parameters with the release name `qtest-parameters`:
 ```bash
-helm install qtest-parameters qtest/qtest-parameters -n qtest
+helm install qtest-parameters -f parameters-values-kind.yaml -n qtest
 ```
 ## Uninstallation
 Removal is the reverse of installation. Start removal of the apps first and then Manager.  Example:
 ```bash
 helm uninstall qtest-parameters
 helm uninstall qtest-manager
-
