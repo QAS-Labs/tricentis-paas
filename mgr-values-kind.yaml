@@ -49,8 +49,7 @@ ingress:
   hosts:
   - nephele.qtest.local
   tls:
-  - secretName: qtest-tls-secret
-    hosts:
+  - hosts:
     - nephele.qtest.local
 
 limitRange:
