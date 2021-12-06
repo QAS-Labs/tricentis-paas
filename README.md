@@ -34,7 +34,7 @@ Note for <b>Windows</b> users:  If you have an error starting the qTest containe
 
 ## Deploy qTest via local Helm
 <code>export QCHART="location of your qtest_chart Helm repo"</code><p>
-<code>helm install qtest -f values-local.yaml $QCHART/Charts/qtest-chart</code>
+<code>helm install qtest -f mgr-values-kind.yaml $QCHART/Charts/qtest-chart</code>
 
 ## Sanity Tests
 <code>./sanity.sh</code>
