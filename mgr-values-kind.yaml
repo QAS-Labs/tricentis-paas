@@ -55,9 +55,9 @@ qTestManager:
         beta:
           clients: -1
   blobStorage:
-    type: disk_storage
+    type: amazon_s3_access_key
     region: us-east-1
-    sharedBucket: "qtest"
+    sharedBucket: qtest
   s3:
     folder: qtest/manager
     scanUrl: https://clamav-13.qtest.local
@@ -67,24 +67,24 @@ qTestManager:
 ingress:
   className: nginx
   hosts:
-  - mgr.qtest.local
+  - nephele.qtest.local
   tls:
   - secretName: qtest-tls-secret
     hosts:
-    - mgr.qtest.local
+    - nephele.qtest.local
 
 limitRange:
   enabled: true
   limits:
     - max:
         cpu: "1"
-        memory: 16Gi
+        memory: 8Gi
       default:
         cpu: "1"
-        memory: 16Gi
+        memory: 8Gi
       defaultRequest:
         cpu: "1"
-        memory: 16Gi
+        memory: 8Gi
       type: Container
 
 persistence:
@@ -103,11 +103,6 @@ service:
 ingressClass:
   enabled: false
   controller: k8s.io/ingress-nginx
-
-testconductor:
-  environment:
-    isOnPremise: true
-    singleInstance: true
 
 # HPA values
 autoscaling:
