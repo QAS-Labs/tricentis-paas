@@ -27,14 +27,6 @@ qTestManager:
   preUrlHttps: https://<sitename>.qtest.local
   attachmentFolderPath: /mnt/data/qtest/attachments
   licenseFolderPath: /mnt/data/qtest/license
-  async:
-    threadNo : 100
-    maxCpu : 101
-    databaseCpu: 101
-  action:
-    task:
-      executor:
-        poolSize: 2
   qtest:
     request:
       nonce:
@@ -49,20 +41,8 @@ qTestManager:
     allowed:
       all: true
       domains: ""
-  vera:
-    auto:
-      testrun:
-        beta:
-          clients: -1
   blobStorage:
-    type: amazon_s3_access_key
-    region: us-east-1
-    sharedBucket: qtest
-  s3:
-    folder: qtest/manager
-    scanUrl: https://clamav-13.qtest.local
-    accessKey: ""
-    secretKey: ""
+    type: disk_storage
 
 ingress:
   className: nginx
@@ -78,13 +58,13 @@ limitRange:
   limits:
     - max:
         cpu: "1"
-        memory: 8Gi
+        memory: 3Gi
       default:
         cpu: "1"
-        memory: 8Gi
+        memory: 3Gi
       defaultRequest:
         cpu: "1"
-        memory: 8Gi
+        memory: 3Gi
       type: Container
 
 persistence:
@@ -118,7 +98,7 @@ autoscaling:
 
 # Where are your images?
 image:
-  repository: qasymphony/manager
+  repository:  qasymphony/manager
   liquibase: qasymphony/manager-liquibase
   pullPolicy: IfNotPresent
   tag: latest

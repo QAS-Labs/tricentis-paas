@@ -14,7 +14,7 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 <code>git clone git@github.com:QAS-Labs/qtest-paas</code>
 
 ## qTest Manager parameters to change in values-local.yaml
-<pre>
+
 
 | Parameter                   | Description                                          | Default |
 | --------------------------- | ---------------------------------------------------- | ------- |
@@ -64,7 +64,6 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 | `ingress.host` | qTest Manager hostname | `mgr.qtest.local` |
 | `ingress.tls.hosts` | Configuration for TLS on the Ingress | `mgr.qtest.local` |
 
-</pre>
 
 * Once the server is up and running, copy the server id from the Administrator -> license
 * Reach out the tricentis team and provide the server id for license file
