@@ -48,6 +48,12 @@ ingress:
   className: nginx
   hosts:
   - nephele.qtest.local
+  paths: []
+  extraPaths:
+    - path: /
+      pathType: Prefix
+      backendServiceName: mgr-service
+      backendPort: 8080
   tls:
   - hosts:
     - nephele.qtest.local
@@ -57,13 +63,13 @@ limitRange:
   limits:
     - max:
         cpu: "1"
-        memory: 3Gi
+        memory: 8Gi
       default:
         cpu: "1"
-        memory: 3Gi
+        memory: 8Gi
       defaultRequest:
         cpu: "1"
-        memory: 3Gi
+        memory: 8Gi
       type: Container
 
 persistence:
@@ -85,15 +91,12 @@ ingressClass:
 
 # HPA values
 autoscaling:
-  enabled: false
   minReplicas:
     ui: 1
     api: 0
     notification: 0
     poller: 0
     default: 1
-  targetCPUUtilizationPercentage: 90
-  targetMemoryUtilizationPercentage: 90
 
 # Where are your images?
 image:
