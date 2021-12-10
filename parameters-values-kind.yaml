@@ -1,0 +1,41 @@
+qTestParameters:
+  qTestParametersDBName: parameters
+  qTestParametersDBUserName: postgres
+  qTestParametersDBPwd: cG9zdGdyZXM=
+  qTestParametersDBHostName: host.docker.internal
+  qTestParametersQTestHost: http://mgr-service:8080
+  qTestParametersNodeTLSRejectUnAuthorized: "0"
+  qTestParametersNodeEnv: production
+  qTestParametersPort: 5080
+
+# ************** Don't modify below values ***********************
+secrets:
+  enabled: true
+
+service:
+  type: ClusterIP
+  port: 5080
+  targetPort: 5080
+  serviceName: qtest-parameters-service
+
+ingressClass:
+  enabled: false
+  controller: k8s.io/ingress-nginx
+
+ingress:
+  className: nginx
+  hosts:
+    - parameters.qtest.local
+  paths:
+    - path: /
+      pathType: Prefix
+      backendServiceName: qtest-parameters-service
+      backendPort: 5080
+  extraPaths: []
+  tls:
+    - hosts:
+        - parameters.qtest.local
+
+autoscaling:
+  minReplicas: 1
+  maxReplicas: 2

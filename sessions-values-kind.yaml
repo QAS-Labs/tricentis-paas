@@ -1,0 +1,48 @@
+qTestSession:
+  qTestSessionJSHome: /usr/local/sessions-js
+  qTestSessionNodeEnvironment: production
+  qTestSessionPort: "8080"
+  qTestSessionDBName: sessions
+  qTestSessionDBUserName: postgres
+  qTestSessionDBPwd: cG9zdGdyZXM=
+  qTestSessionDBHostName: host.docker.internal
+  qTestManagerHost: http://mgr-service:8080
+  qTestSessionMasterToken: Qtoy
+  qTestSessionStorageRootPath: /data
+  qTestSessionSecretKey: Q3AyVEJYQ0lHb3N3dWs1eklwTG1nQm1QRkxWMDVrU1RKRHBWMXNaM3Y4VVBoWFBZMERzaERVdmwwOW1seVdETw==
+  qTestStorageBucketName: aws-session-bucket-name
+  qTestSessionClamavURL: http://clam.qtest.local
+  qTestSessionStorageType: amazon_s3
+
+# ************** Don't modify below values ***********************
+secrets:
+  enabled: true
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+  serviceName: qtest-session-service
+  annotations: {}
+
+ingressClass:
+  enabled: false
+  controller: k8s.io/ingress-nginx
+
+ingress:
+  className: nginx
+  hosts:
+  - session.qtest.local
+  paths:
+    - path: /
+      pathType: Prefix
+      backendServiceName: qtest-session-service
+      backendPort: 8080
+  extraPaths: []
+  tls:
+  - hosts:
+    - session.qtest.local
+
+autoscaling:
+  minReplicas: 1
+  maxReplicas: 2

@@ -1,0 +1,43 @@
+qTestPulse:
+  qTestPulseDBName: pulse
+  qTestPulseDBUserName: postgres
+  qTestPulseDBHostName: host.docker.internal
+  qTestPulseDBPwd: cG9zdGdyZXM=
+  qTestPulsePort: "4080"
+  qTestPulseNodeEnv: production
+  qTestPulseRootURL: https://pulse.qtest.local
+  qTestPulseQTestURL: http://mgr-service:8080
+  qTestPulseScenarioURL: https://scenario.local
+  qTestPulseNodeTLSRejectUnAuthorized: "0"
+
+# ************** Don't modify below values ***********************
+secrets:
+  enabled: true
+
+service:
+  type: ClusterIP
+  port: 4080
+  targetPort: 4080
+  serviceName: qtest-pulse-service
+
+ingressClass:
+  enabled: false
+  controller: k8s.io/ingress-nginx
+
+ingress:
+  className: nginx
+  hosts:
+  - pulse.qtest.local
+  paths:
+    - path: /
+      pathType: Prefix 
+      backendServiceName: qtest-pulse-service
+      backendPort: 4080
+  extraPaths: []
+  tls:
+  - hosts:
+    - pulse.qtest.local
+
+autoscaling:
+  minReplicas: 1
+  maxReplicas: 2

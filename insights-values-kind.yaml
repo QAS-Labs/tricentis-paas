@@ -1,0 +1,50 @@
+qTestInsights:
+  qTestInsightsCatalinaOpts: \"-server -d64 -Xms512m -Xmx2048m -XX:MaxPermSize=256m -XX:CompileThreshold=8000 -XX:-DisableExplicitGC -XX:HeapDumpPath=/logs -Djava.awt.headless=true\"
+  qTestInsightsDBName: qTest
+  qTestInsightsDBUser: postgres
+  qTestInsightsDBPassword: cG9zdGdyZXM=
+  qTestInsightsDBHost: host.docker.internal
+  qTestInsightsWriteQTestDBName: qTest
+  qTestInsightsWriteQTestDBUser: postgres
+  qTestInsightsWriteQTestDBPassword: cG9zdGdyZXM=
+  qTestInsightsWriteQTestDBHost: host.docker.internal
+  qTestInsightsSessionDBName: sessions
+  qTestInsightsSessionDBUser: postgres
+  qTestInsightsSessionDBPassword: cG9zdGdyZXM=
+  qTestInsightsSessionDBHost: host.docker.internal
+  qTestInsightsCSRFAllowPattern: \"$insights_security_csrf_trusted_source_pattern\"
+
+
+secrets:
+  enabled: true
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+  serviceName: qtest-insights-service
+
+
+ingressClass:
+  enabled: false
+  controller: k8s.io/ingress-nginx
+
+ingress:
+  className: nginx
+  hosts:
+    - insights.qtest.local
+  paths:
+    - path: /
+      pathType: Prefix
+      backendServiceName: qtest-insights-service
+      backendPort: 8080
+
+  extraPaths: []
+  tls:
+    - hosts:
+        - insights.qtest.local
+
+autoscaling:
+  minReplicas: 1
+  maxReplicas: 2
+
