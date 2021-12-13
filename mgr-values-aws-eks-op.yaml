@@ -8,7 +8,7 @@ serviceAccount:
   create: true
   annotations:
     # Replace role
-    eks.amazonaws.com/role-arn: arn:aws:iam::369226913651:role/qTestEKS-qa-us-east-1-qTestS3Role
+    eks.amazonaws.com/role-arn: arn:aws:iam::accountnumber:role/
 
 limitRange:
   enabled: true
