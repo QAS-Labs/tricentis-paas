@@ -32,7 +32,7 @@ ingressClass:
 ingress:
   className: nginx
   hosts:
-  - session.qtest.local
+  - sessions.qtest.local
   paths:
     - path: /
       pathType: Prefix
@@ -41,7 +41,7 @@ ingress:
   extraPaths: []
   tls:
   - hosts:
-    - session.qtest.local
+    - sessions.qtest.local
 
 autoscaling:
   minReplicas: 1
