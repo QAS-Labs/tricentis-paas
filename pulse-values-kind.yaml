@@ -9,6 +9,10 @@ qTestPulse:
   qTestPulseQTestURL: http://mgr-service:8080
   qTestPulseScenarioURL: https://scenario.local
   qTestPulseNodeTLSRejectUnAuthorized: "0"
+  qTestPulseDBSSLEnable: false
+  qTestPulseDBSSLMountPath: "/etc/ssl"
+  qTestPulseDBSSL: "?ssl=true&sslmode=verify-full&sslrootcert=/etc/ssl/root.crt"
+  qTestPulseDBRootCRT: ""
 
 # ************** Don't modify below values ***********************
 secrets:

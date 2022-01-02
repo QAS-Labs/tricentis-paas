@@ -8,6 +8,10 @@ qTestManager:
       postgresReadOnlyUrl: jdbc:postgresql://host.docker.internal/qTest
       postgresReadOnlyUserName: postgres
       postgresReadOnlyPassword: cG9zdGdyZXM=
+      sslEnable: false
+      sslMountPath: "/etc/ssl"
+      sslPath: "?ssl=true&sslmode=verify-full&sslrootcert=/etc/ssl/root.crt"
+      rootCRT: ""
   mail:
     host: "smtp.local"
     port: 465

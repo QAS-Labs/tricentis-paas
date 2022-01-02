@@ -24,6 +24,10 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 | `client.jdbc.postgres.readonly.url` | PSQL readonly database URL | `jdbc:postgresql://host.docker.internal/qtest` |
 | `client.jdbc.postgres.readonly.username` | PSQL username | `postgres` |
 | `client.jdbc.postgres.readonly.password` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
+| `client.jdbc.sslEnable` | Enable ssl connections | `false` |
+| `client.jdbc.sslMountPath` | Postgresql ssl certificate mount directory  | `\etc\ssl` |
+| `client.jdbc.sslPath` | Postgresql ssl connection string | `?ssl=true&sslmode=verify-full&sslrootcert=/etc/ssl/root.crt` (please chnage only cert path) |
+| `client.jdbc.cert` | Postgresql client certificate | `` (postgres client certificate, base64-encoded) |
 | `mail.host` | SMTP host name | `smtp.local` |
 | `mail.port` | SMTP port number | `465` |
 | `mail.username` | SMTP username | `qtest` |

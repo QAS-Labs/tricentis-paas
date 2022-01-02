@@ -7,6 +7,10 @@ qTestParameters:
   qTestParametersNodeTLSRejectUnAuthorized: "0"
   qTestParametersNodeEnv: production
   qTestParametersPort: 5080
+  qTestParametersDBSSLEnable: false
+  qTestParametersDBSSLMountPath: "/etc/ssl"
+  qTestParametersDBSSL: "?ssl=true&sslmode=verify-full&sslrootcert=/etc/ssl/root.crt"
+  qTestParametersDBRootCRT: ""
 
 # ************** Don't modify below values ***********************
 secrets:

@@ -1,0 +1,49 @@
+qTestScenario:
+  qTestScenarioDBName: scenario
+  qTestScenarioDBUserName: postgres
+  qTestScenarioDBPwd: cG9zdGdyZXM=
+  qTestScenarioDBHostName: host.docker.internal
+  qTestScenarioPort: "6080"
+  qTestScenarioLocalBaseURL: https://scenario.local
+  qTestScenarioNodeTLSRejectUnAuthorized: "0"
+  qTestScenarioNodeEnvironment: production
+  qTestScenarioRefreshTokenSecret: ""
+  qTestScenarioAppKeyDescriptor: ""
+  qTestScenarioQTestURL: https://nephele.qtest.local
+  qTestScenarioDBSSLEnable: false
+  qTestScenarioDBSSLMountPath: "/etc/ssl"
+  qTestScenarioDBSSL: "?ssl=true&sslmode=verify-full&sslrootcert=/etc/ssl/root.crt"
+  qTestScenarioDBRootCRT: ""
+  
+# ************** Don't modify below values ***********************
+secrets:
+  enabled: true
+
+service:
+  type: ClusterIP
+  port: 6080
+  targetPort: 6080
+  serviceName: qtest-scenario-service
+  annotations: {}
+
+ingressClass:
+  enabled: false
+  controller: k8s.io/ingress-nginx
+
+ingress:
+  className: nginx
+  hosts:
+  - scenario.qtest.local
+  paths:
+    - path: /
+      pathType: Prefix
+      backendServiceName: qtest-scenario-service
+      backendPort: 8080
+  extraPaths: []
+  tls:
+  - hosts:
+    - scenario.qtest.local
+
+autoscaling:
+  minReplicas: 1
+  maxReplicas: 2

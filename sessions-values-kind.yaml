@@ -13,6 +13,11 @@ qTestSession:
   qTestStorageBucketName: aws-session-bucket-name
   qTestSessionClamavURL: http://clam.qtest.local
   qTestSessionStorageType: amazon_s3
+  qTestSessionDBSSLEnable: false
+  qTestSessionDBSSLMountPath: "/etc/ssl"
+  qTestSessionDBSSL: "?ssl=true&sslmode=verify-full&sslrootcert=/etc/ssl/root.crt"
+  qTestSessionDBRootCRT: ""
+
 
 # ************** Don't modify below values ***********************
 secrets:

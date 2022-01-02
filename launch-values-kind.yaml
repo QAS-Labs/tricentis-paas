@@ -8,7 +8,10 @@ qTestLaunch:
   qTestLaunchNodeTLSRejectUnAuthorized: "0"
   qTestLaunchTCPWD: "qTest"
   qTestLaunchPort: "3080"
-
+  qTestLaunchDBSSLEnable: false
+  qTestLaunchDBSSLMountPath: "/etc/ssl"
+  qTestLaunchDBSSL: "?ssl=true&sslmode=verify-full&sslrootcert=/etc/ssl/root.crt"
+  qTestLaunchDBRootCRT: ""
 
 # ************** Don't modify below values ***********************
 secrets:
