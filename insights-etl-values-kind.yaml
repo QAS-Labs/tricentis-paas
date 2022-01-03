@@ -1,0 +1,53 @@
+qTestInsightsEtl:
+  qTestLogPath: /logs
+  qTestUpdateDB: true
+  qTestInsightsEtlDBName: qTest
+  qTestInsightsEtlDBUser: postgres
+  qTestInsightsEtlDBPassword: cG9zdGdyZXM=
+  qTestInsightsEtlDBHost: host.docker.internal
+  qTestInsightsEtlWriteQTestDBName: qTest
+  qTestInsightsEtlWriteQTestDBUser: postgres
+  qTestInsightsEtlWriteQTestDBPassword: cG9zdGdyZXM=
+  qTestInsightsEtlWriteQTestDBHost: host.docker.internal
+  qTestInsightsEtlSessionDBName: sessions
+  qTestInsightsEtlSessionDBUser: postgres
+  qTestInsightsEtlSessionDBPassword: cG9zdGdyZXM=
+  qTestInsightsEtlSessionDBHost: host.docker.internal
+  writeSessionsDBPassword: cG9zdGdyZXM=
+  writeSessionsDBHost: host.docker.internal
+  writeSessionsDBName: qTest
+  writeSessionsDBUser: postgres
+
+secrets:
+  enabled: true
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+  serviceName: insights-etl-service
+
+
+ingressClass:
+  enabled: false
+  controller: k8s.io/ingress-nginx
+
+ingress:
+  className: nginx
+  hosts:
+    - insights-etl.qtest.local
+  paths:
+    - path: /
+      pathType: Prefix
+      backendServiceName: insights-service
+      backendPort: 8080
+
+  extraPaths: []
+  tls:
+    - hosts:
+        - insights-etl.qtest.local
+
+autoscaling:
+  minReplicas: 1
+  maxReplicas: 2
+

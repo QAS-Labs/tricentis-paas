@@ -7,7 +7,7 @@ qTestPulse:
   qTestPulseNodeEnv: production
   qTestPulseRootURL: https://pulse.qtest.local
   qTestPulseQTestURL: http://mgr-service:8080
-  qTestPulseScenarioURL: https://scenario.local
+  qTestPulseScenarioURL: https://scenario.qtest.local
   qTestPulseNodeTLSRejectUnAuthorized: "0"
   qTestPulseDBSSLEnable: false
   qTestPulseDBSSLMountPath: "/etc/ssl"

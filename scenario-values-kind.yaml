@@ -4,7 +4,7 @@ qTestScenario:
   qTestScenarioDBPwd: cG9zdGdyZXM=
   qTestScenarioDBHostName: host.docker.internal
   qTestScenarioPort: "6080"
-  qTestScenarioLocalBaseURL: https://scenario.local
+  qTestScenarioLocalBaseURL: https://scenario.qtest.local
   qTestScenarioNodeTLSRejectUnAuthorized: "0"
   qTestScenarioNodeEnvironment: production
   qTestScenarioRefreshTokenSecret: ""

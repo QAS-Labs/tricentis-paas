@@ -14,7 +14,6 @@ qTestInsights:
   qTestInsightsSessionDBHost: host.docker.internal
   qTestInsightsCSRFAllowPattern: \"$insights_security_csrf_trusted_source_pattern\"
 
-
 secrets:
   enabled: true
 
@@ -22,7 +21,7 @@ service:
   type: ClusterIP
   port: 8080
   targetPort: 8080
-  serviceName: qtest-insights-service
+  serviceName: insights-service
 
 
 ingressClass:
@@ -36,7 +35,7 @@ ingress:
   paths:
     - path: /
       pathType: Prefix
-      backendServiceName: qtest-insights-service
+      backendServiceName: insights-service
       backendPort: 8080
 
   extraPaths: []
