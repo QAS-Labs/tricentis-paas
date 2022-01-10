@@ -13,7 +13,7 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 ## Clone this repo
 <code>git clone git@github.com:QAS-Labs/qtest-paas</code>
 
-## qTest Manager parameters to change in mgr-values-kind.yaml
+## qTest Manager parameters to change in mgr-values-kind.yaml or mgr-values-aws-eks-op.yaml
 
 
 | Parameter                   | Description                                          | Default |
@@ -67,6 +67,120 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 | `ingress.class` | Name of IngressClass | `nginx` |
 | `ingress.host` | qTest Manager hostname | `mgr.qtest.local` |
 | `ingress.tls.hosts` | Configuration for TLS on the Ingress | `mgr.qtest.local` |
+
+## Parameters app configurations to change in parameters-values-kind.yaml
+
+
+ Parameter                   | Description                                          | Default |
+| --------------------------- | ---------------------------------------------------- | ------- |
+| `qTestParametersDBName` | PSQL database name of the parameters app | `parameters` |
+| `qTestParametersDBUserName` | PSQL username | `postgres` |
+| `qTestParametersDBPwd` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
+| `qTestParametersDBHostName` | PSQL database host name | `host.docker.internal` |
+| `qTestParametersDBSSLEnable` | Enable ssl connections | `false` |
+| `qTestParametersDBSSLMountPath` | Postgresql ssl certificate mount directory | `\etc\ssl` |
+| `qTestParametersDBSSL` | SSL Connection which appends for SSL Connection (only change cert name) | `?ssl=true&sslmode=verify-full&sslrootcert=/etc/ssl/root.crt` |
+| `qTestParametersDBRootCRT` | Postgresql client certificate | `` (postgres client certificate, base64-encoded) |
+
+## Launch app configurations to change in launch-values-kind.yaml
+
+
+ Parameter                   | Description                                          | Default |
+| --------------------------- | ---------------------------------------------------- | ------- |
+| `qTestLaunchDBName` | PSQL database name of the qTest Manager | `qtest` |
+| `qTestLaunchDBUserName` | PSQL username | `postgres` |
+| `qTestLaunchDBPwd` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
+| `qTestLaunchDBHostName` | PSQL database host name | `host.docker.internal` |
+| `qTestLaunchRootURL` | qTest Launch url | `https://launch.qtest.local` |
+| `qTestLaunchDBSSLEnable` | Enable ssl connections | `false` |
+| `qTestLaunchDBSSLMountPath` | Postgresql ssl certificate mount directory | `\etc\ssl` |
+| `qTestLaunchDBSSL` | SSL Connection which appends for SSL Connection (only change cert name) | `?ssl=true&sslmode=verify-full&sslrootcert=/etc/ssl/root.crt` |
+| `qTestLaunchDBRootCRT` | Postgresql client certificate | `` (postgres client certificate, base64-encoded) |
+
+## Pulse app configurations to change in pulse-values-kind.yaml
+
+
+ Parameter                   | Description                                          | Default |
+| --------------------------- | ---------------------------------------------------- | ------- |
+| `qTestPulseDBName` | PSQL database name of the pulse | `pulse` |
+| `qTestPulseDBUserName` | PSQL username | `postgres` |
+| `qTestPulseDBPwd` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
+| `qTestPulseDBHostName` | PSQL database host name | `host.docker.internal` |
+| `qTestPulseRootURL` | qTest Pulse url | `https://pulse.qtest.local` |
+| `qTestPulseScenarioURL` | qTest Launch url | `https://scenario.qtest.local` |
+| `qTestPulseDBSSLEnable` | Enable ssl connections | `false` |
+| `qTestPulseDBSSLMountPath` | Postgresql ssl certificate mount directory | `\etc\ssl` |
+| `qTestPulseDBSSL` | SSL Connection which appends for SSL Connection (only change cert name) | `?ssl=true&sslmode=verify-full&sslrootcert=/etc/ssl/root.crt` |
+| `qTestPulseDBRootCRT` | Postgresql client certificate | `` (postgres client certificate, base64-encoded) |
+
+## Scenario app configurations to change in scenario-values-kind.yaml
+
+
+ Parameter                   | Description                                          | Default |
+| --------------------------- | ---------------------------------------------------- | ------- |
+| `qTestScenarioDBName` | PSQL database name of the scenario | `scenario` |
+| `qTestScenarioDBUserName` | PSQL username | `postgres` |
+| `qTestScenarioDBPwd` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
+| `qTestScenarioDBHostName` | PSQL database host name | `host.docker.internal` |
+| `qTestScenarioLocalBaseURL` | qTest Pulse url | `https://scenario.qtest.local` |
+| `qTestScenarioQTestURL` | qTest Launch url | `https://nephele.qtest.local` |
+| `qTestScenarioDBSSLEnable` | Enable ssl connections | `false` |
+| `qTestScenarioDBSSLMountPath` | Postgresql ssl certificate mount directory | `\etc\ssl` |
+| `qTestScenarioDBSSL` | SSL Connection which appends for SSL Connection (only change cert name) | `?ssl=true&sslmode=verify-full&sslrootcert=/etc/ssl/root.crt` |
+| `qTestScenarioDBRootCRT` | Postgresql client certificate | `` (postgres client certificate, base64-encoded) |
+
+## Session app configurations to change in sessions-values-kind.yaml
+
+
+ Parameter                   | Description                                          | Default |
+| --------------------------- | ---------------------------------------------------- | ------- |
+| `qTestSessionDBName` | PSQL database name of the session | `sessions` |
+| `qTestSessionDBUserName` | PSQL username | `postgres` |
+| `qTestSessionDBPwd` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
+| `qTestSessionDBHostName` | PSQL database host name | `host.docker.internal` |
+| `qTestStorageBucketName` | Amazon S3 bucket name | `aws-session-bucket-name` |
+| `qTestSessionClamavURL` | qTest clama url | `https://clam.qtest.local` |
+| `qTestSessionStorageType` | Session storage type | `amazon_s3 | disk_storage` |
+| `qTestSessionDBSSLEnable` | Enable ssl connections | `false` |
+| `qTestSessionDBSSLMountPath` | Postgresql ssl certificate mount directory | `\etc\ssl` |
+| `qTestSessionDBSSL` | SSL Connection which appends for SSL Connection (only change cert name) | `?ssl=true&sslmode=verify-full&sslrootcert=/etc/ssl/root.crt` |
+| `qTestSessionDBRootCRT` | Postgresql client certificate | `` (postgres client certificate, base64-encoded) |
+
+## Insights app configurations to change in insights-values-kind.yaml
+
+
+ Parameter                   | Description                                          | Default |
+| --------------------------- | ---------------------------------------------------- | ------- |
+| `qTestInsightsDBName` | PSQL database name of the qTest manager | `qTest` |
+| `qTestInsightsDBUser` | PSQL username | `postgres` |
+| `qTestInsightsDBPassword` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
+| `qTestInsightsDBHost` | PSQL database host name | `host.docker.internal` |
+| `qTestInsightsWriteQTestDBName` | PSQL database name of the qTest manager | `qTest` |
+| `qTestInsightsWriteQTestDBUser` | PSQL username | `postgres` |
+| `qTestInsightsWriteQTestDBPassword` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
+| `qTestInsightsWriteQTestDBHost` | PSQL database host name | `host.docker.internal` |
+| `qTestInsightsSessionDBName` | PSQL database name of the session | `sessions` |
+| `qTestInsightsSessionDBUser` | PSQL username | `postgres` |
+| `qTestInsightsSessionDBPassword` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
+| `qTestInsightsSessionDBHost` | PSQL database host name | `host.docker.internal` |
+
+## Insights etl app configurations to change in insights-etl-values-kind.yaml
+
+
+ Parameter                   | Description                                          | Default |
+| --------------------------- | ---------------------------------------------------- | ------- |
+| `qTestInsightsEtlDBName` | PSQL database name of the qTest manager | `qTest` |
+| `qTestInsightsEtlDBUser` | PSQL username | `postgres` |
+| `qTestInsightsEtlDBPassword` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
+| `qTestInsightsEtlDBHost` | PSQL database host name | `host.docker.internal` |
+| `qTestInsightsEtlWriteQTestDBName` | PSQL database name of the qTest manager | `qTest` |
+| `qTestInsightsEtlWriteQTestDBUser` | PSQL username | `postgres` |
+| `qTestInsightsEtlWriteQTestDBPassword` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
+| `qTestInsightsEtlWriteQTestDBHost` | PSQL database host name | `host.docker.internal` |
+| `qTestInsightsEtlSessionDBName` | PSQL database name of the session | `sessions` |
+| `qTestInsightsEtlSessionDBUser` | PSQL username | `postgres` |
+| `qTestInsightsEtlSessionDBPassword` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
+| `qTestInsightsEtlSessionDBHost` | PSQL database host name | `host.docker.internal` |
 
 
 * Once the server is up and running, copy the server id from the Administrator -> license

@@ -1,8 +1,8 @@
 qTestPulse:
   qTestPulseDBName: pulse
   qTestPulseDBUserName: postgres
-  qTestPulseDBHostName: host.docker.internal
   qTestPulseDBPwd: cG9zdGdyZXM=
+  qTestPulseDBHostName: host.docker.internal
   qTestPulsePort: "4080"
   qTestPulseNodeEnv: production
   qTestPulseRootURL: https://pulse.qtest.local
