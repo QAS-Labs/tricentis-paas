@@ -75,7 +75,6 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 | --------------------------- | ---------------------------------------------------- | ------- |
 | `qTestParametersDBName` | PSQL database name of the parameters app | `parameters` |
 | `qTestParametersDBUserName` | PSQL username | `postgres` |
-| `qTestParametersDBPwd` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
 | `qTestParametersDBHostName` | PSQL database host name | `host.docker.internal` |
 | `qTestParametersDBSSLEnable` | Enable ssl connections | `false` |
 | `qTestParametersDBSSLMountPath` | Postgresql ssl certificate mount directory | `\etc\ssl` |
@@ -89,7 +88,6 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 | --------------------------- | ---------------------------------------------------- | ------- |
 | `qTestLaunchDBName` | PSQL database name of the qTest Manager | `qtest` |
 | `qTestLaunchDBUserName` | PSQL username | `postgres` |
-| `qTestLaunchDBPwd` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
 | `qTestLaunchDBHostName` | PSQL database host name | `host.docker.internal` |
 | `qTestLaunchRootURL` | qTest Launch url | `https://launch.qtest.local` |
 | `qTestLaunchDBSSLEnable` | Enable ssl connections | `false` |
@@ -104,7 +102,6 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 | --------------------------- | ---------------------------------------------------- | ------- |
 | `qTestPulseDBName` | PSQL database name of the pulse | `pulse` |
 | `qTestPulseDBUserName` | PSQL username | `postgres` |
-| `qTestPulseDBPwd` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
 | `qTestPulseDBHostName` | PSQL database host name | `host.docker.internal` |
 | `qTestPulseRootURL` | qTest Pulse url | `https://pulse.qtest.local` |
 | `qTestPulseScenarioURL` | qTest Launch url | `https://scenario.qtest.local` |
@@ -120,7 +117,6 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 | --------------------------- | ---------------------------------------------------- | ------- |
 | `qTestScenarioDBName` | PSQL database name of the scenario | `scenario` |
 | `qTestScenarioDBUserName` | PSQL username | `postgres` |
-| `qTestScenarioDBPwd` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
 | `qTestScenarioDBHostName` | PSQL database host name | `host.docker.internal` |
 | `qTestScenarioLocalBaseURL` | qTest Pulse url | `https://scenario.qtest.local` |
 | `qTestScenarioQTestURL` | qTest Launch url | `https://nephele.qtest.local` |
@@ -136,7 +132,6 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 | --------------------------- | ---------------------------------------------------- | ------- |
 | `qTestSessionDBName` | PSQL database name of the session | `sessions` |
 | `qTestSessionDBUserName` | PSQL username | `postgres` |
-| `qTestSessionDBPwd` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
 | `qTestSessionDBHostName` | PSQL database host name | `host.docker.internal` |
 | `qTestStorageBucketName` | Amazon S3 bucket name | `aws-session-bucket-name` |
 | `qTestSessionClamavURL` | qTest clama url | `https://clam.qtest.local` |
@@ -153,7 +148,6 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 | --------------------------- | ---------------------------------------------------- | ------- |
 | `qTestInsightsDBName` | PSQL database name of the qTest manager | `qTest` |
 | `qTestInsightsDBUser` | PSQL username | `postgres` |
-| `qTestInsightsDBPassword` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
 | `qTestInsightsDBHost` | PSQL database host name | `host.docker.internal` |
 | `qTestInsightsWriteQTestDBName` | PSQL database name of the qTest manager | `qTest` |
 | `qTestInsightsWriteQTestDBUser` | PSQL username | `postgres` |
@@ -171,15 +165,12 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 | --------------------------- | ---------------------------------------------------- | ------- |
 | `qTestInsightsEtlDBName` | PSQL database name of the qTest manager | `qTest` |
 | `qTestInsightsEtlDBUser` | PSQL username | `postgres` |
-| `qTestInsightsEtlDBPassword` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
 | `qTestInsightsEtlDBHost` | PSQL database host name | `host.docker.internal` |
 | `qTestInsightsEtlWriteQTestDBName` | PSQL database name of the qTest manager | `qTest` |
 | `qTestInsightsEtlWriteQTestDBUser` | PSQL username | `postgres` |
-| `qTestInsightsEtlWriteQTestDBPassword` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
 | `qTestInsightsEtlWriteQTestDBHost` | PSQL database host name | `host.docker.internal` |
 | `qTestInsightsEtlSessionDBName` | PSQL database name of the session | `sessions` |
 | `qTestInsightsEtlSessionDBUser` | PSQL username | `postgres` |
-| `qTestInsightsEtlSessionDBPassword` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
 | `qTestInsightsEtlSessionDBHost` | PSQL database host name | `host.docker.internal` |
 
 
