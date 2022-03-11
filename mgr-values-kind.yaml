@@ -29,7 +29,6 @@ qTestManager:
     urlExternal: https://nephele.qtest.local
   preUrl: http://<sitename>.qtest.local
   preUrlHttps: https://<sitename>.qtest.local
-  pulseUrlBase: "http://localhost:8080"  
   attachmentFolderPath: /mnt/data/qtest/attachments
   licenseFolderPath: /mnt/data/qtest/license
   qtest:
@@ -65,18 +64,16 @@ ingress:
 
 limitRange:
   enabled: true
-  targetCPUUtilizationPercentage: 95
-  targetMemoryUtilizationPercentage: 95
   limits:
     - max:
         cpu: "1"
-        memory: 3Gi
+        memory: 8Gi
       default:
         cpu: "1"
-        memory: 3Gi
+        memory: 8Gi
       defaultRequest:
         cpu: "1"
-        memory: 3Gi
+        memory: 8Gi
       type: Container
 
 persistence:
@@ -98,9 +95,6 @@ ingressClass:
 
 # HPA values
 autoscaling:
-  enabled: false
-  targetCPUUtilizationPercentage: 95
-  targetMemoryUtilizationPercentage: 95
   minReplicas:
     ui: 1
     api: 0
@@ -110,13 +104,8 @@ autoscaling:
 
 # Where are your images?
 image:
-  repository:  localhost:5000/qtestmgr
-  liquibase: localhost:5000/liquibase
+  repository:  qasymphony/manager
+  liquibase: qasymphony/manager-liquibase
   pullPolicy: IfNotPresent
   tag: latest
   liquibasetag: latest
-
-testconductor:
-  environment:
-    isOnPremise: false
-    singleInstance: true

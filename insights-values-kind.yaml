@@ -42,3 +42,8 @@ ingress:
   tls:
     - hosts:
         - insights.qtest.local
+
+autoscaling:
+  minReplicas: 1
+  maxReplicas: 2
+
