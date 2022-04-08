@@ -120,5 +120,4 @@ imageCredentials:
   existingImageCredentials: regcred
 testconductor:
   environment:
-    isOnPremise: true
     singleInstance: true
