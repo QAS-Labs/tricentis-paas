@@ -2,10 +2,10 @@
 qTestManager:
   client:
     jdbc:
-      postgresUrl: jdbc:postgresql://host.docker.internal/qTest
+      postgresUrl: jdbc:postgresql://psql-postgresql/qTest
       postgresUserName: postgres
       postgresPassword: postgres
-      postgresReadOnlyUrl: jdbc:postgresql://host.docker.internal/qTest
+      postgresReadOnlyUrl: jdbc:postgresql://psql-postgresql/qTest
       postgresReadOnlyUserName: postgres
       postgresReadOnlyPassword: postgres
       sslEnable: false
@@ -26,7 +26,7 @@ qTestManager:
     port: 9200
     permittedClients: ""
   notification:
-    urlExternal: https://nephele.qtest.local
+    urlExternal: https://mgr-service.500c00ae4fa24c86bda7.westus2.aksapp.io
   preUrl: http://<sitename>.qtest.local
   preUrlHttps: https://<sitename>.qtest.local
   pulseUrlBase: "http://localhost:8080"  
@@ -49,20 +49,6 @@ qTestManager:
   blobStorage:
     type: disk_storage
 
-ingress:
-  className: nginx
-  hosts:
-  - nephele.qtest.local
-  paths: []
-  extraPaths:
-    - path: /
-      pathType: Prefix
-      backendServiceName: mgr-service
-      backendPort: 8080
-  tls:
-  - hosts:
-    - nephele.qtest.local
-
 limitRange:
   enabled: true
   targetCPUUtilizationPercentage: 95
@@ -83,18 +69,27 @@ persistence:
   accessMode: ReadWriteOnce
   size: 10Gi
 
-# ************** Don't modify below values ***********************
-# Setup Ingress with TLS
 secrets:
   enabled: true
 
-# Your desktop doesn't have an LB
-service:
-  type: ClusterIP
-
+# Ingress
 ingressClass:
   enabled: false
-  controller: k8s.io/ingress-nginx
+
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+  hosts:
+  - mgr-service.500c00ae4fa24c86bda7.westus2.aksapp.io
+  paths: []
+  extraPaths:
+    - path: /
+      pathType: Prefix
+      backendServiceName: mgr-service
+      backendPort: 8080
+  tls:
+  - hosts:
+    - mgr-service.500c00ae4fa24c86bda7.westus2.aksapp.io
 
 # HPA values
 autoscaling:
@@ -110,11 +105,11 @@ autoscaling:
 
 # Where are your images?
 image:
-  repository: localhost:5000/qtestmgr
-  liquibase: localhost:5000/liquibase
-  pullPolicy: Always
-  tag: latest
-  liquibasetag: latest
+  repository: tricentisimage/qtest-mgr
+  liquibase: tricentisimage/qtest-mgr-liquibase
+  pullPolicy: IfNotPresent
+  tag: 11.0.5-f41702f
+  liquibasetag: 11.0.5-f41702f
 imageCredentials:
   enabled: true
   existingImageCredentials: regcred
