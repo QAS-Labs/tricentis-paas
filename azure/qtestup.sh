@@ -10,3 +10,6 @@ helm install psql \
 kubectl create secret generic regcred \
     --from-file=.dockerconfigjson=$HOME/.docker/config.json \
     --type=kubernetes.io/dockerconfigjson
+
+# Install qTest Manager
+helm install qtest -f ./mgr-values-aks.yaml qtest/qtest-mgr -n qtest --create-namespace
