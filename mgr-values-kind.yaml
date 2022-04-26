@@ -2,10 +2,10 @@
 qTestManager:
   client:
     jdbc:
-      postgresUrl: jdbc:postgresql://host.docker.internal/qTest
+      postgresUrl: jdbc:postgresql://psql-postgresql/qTest
       postgresUserName: postgres
       postgresPassword: postgres
-      postgresReadOnlyUrl: jdbc:postgresql://host.docker.internal/qTest
+      postgresReadOnlyUrl: jdbc:postgresql://psql-postgresql/qTest
       postgresReadOnlyUserName: postgres
       postgresReadOnlyPassword: postgres
       sslEnable: false

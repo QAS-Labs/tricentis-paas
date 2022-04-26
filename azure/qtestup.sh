@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install PSQL
-helm install psql \
+helm install psql --wait \
     --set auth.postgresPassword=postgres \
     --set auth.database=qTest \
     bitnami/postgresql 

@@ -13,7 +13,6 @@ if [ "${running}" != 'true' ]; then
 fi
 
 # create a cluster with the local registry enabled in containerd
-echo "Creating cluster..."
 cat <<EOF | kind create cluster --image kindest/node:v1.23.0 --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
@@ -58,27 +57,19 @@ data:
     help: "https://kind.sigs.k8s.io/docs/user/local-registry/"
 EOF
 
-# Install DNSUtil (optional)
-# kubectl apply -f https://k8s.io/examples/admin/dns/dnsutils.yaml
-
 # Install metrics (optional)
 echo "Installing metrics..."
 kubectl apply -f ./metrics.yaml
 
+# Install local psql with "qTest" database
+echo "Installing PostgreSQL..."
+helm install psql --wait --set auth.postgresPassword=postgres --set auth.database=qTest bitnami/postgresql -n qtest --create-namespace
+
 # Install NginX Ingress Controller
 echo "Installing NginX Ingress Controller..."
-#VERSION=$(curl -s https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/stable.txt)
-#kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/${VERSION}/deploy/static/provider/kind/deploy.yaml
-
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 kubectl wait --namespace ingress-nginx \
   --for=condition=ready pod \
   --selector=app.kubernetes.io/component=controller \
-  --timeout=90s
+  --timeout=180s
 
-# Install the kubernetes dashboard
-# kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.3.1/aio/deploy/recommended.yaml
-# kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | awk '/^deployment-controller-token-/{print $1}') | awk '$1=="token:"{print $2}'
-# kubectl proxy &
-
-kubectl create namespace qtest
