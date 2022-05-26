@@ -63,6 +63,7 @@ kubectl apply -f ./metrics.yaml
 
 # Install local psql with "qTest" database
 echo "Installing PostgreSQL..."
+helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install psql --wait --set auth.postgresPassword=postgres --set auth.database=qTest bitnami/postgresql -n qtest --create-namespace
 
 # Install NginX Ingress Controller
