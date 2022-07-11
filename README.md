@@ -80,6 +80,7 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 | `qTestParametersDBSSLMountPath` | Postgresql ssl certificate mount directory | `\etc\ssl` |
 | `qTestParametersDBSSL` | SSL Connection which appends for SSL Connection (only change cert name) | `?ssl=true&sslmode=verify-full&sslrootcert=/etc/ssl/root.crt` |
 | `qTestParametersDBRootCRT` | Postgresql client certificate | `` (postgres client certificate, base64-encoded) |
+| `serverAppSSLRequired` | Runs pod of Parameters app on SSL | `false` |
 
 ## Launch app configurations to change in launch-values-kind.yaml
 
@@ -157,6 +158,7 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 | `qTestInsightsSessionDBUser` | PSQL username | `postgres` |
 | `qTestInsightsSessionDBPassword` | PSQL password | `cG9zdGdyZXM=` (`postgres`, base64-encoded) |
 | `qTestInsightsSessionDBHost` | PSQL database host name | `host.docker.internal` |
+| `serverAppSSLRequired` | Runs pod of Insights app on SSL | `false` |
 
 ## Insights etl app configurations to change in insights-etl-values-kind.yaml
 
