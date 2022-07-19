@@ -175,6 +175,14 @@ This is a quickstart to deploy Tricentis qTest on kind multi-node cluster.
 | `qTestInsightsEtlSessionDBUser` | PSQL username | `postgres` |
 | `qTestInsightsEtlSessionDBHost` | PSQL database host name | `host.docker.internal` |
 
+## Test configurations app parameters to change in testconfig-values-kind.yaml
+
+
+Parameter                   | Description                                          | Default |
+| --------------------------- | ---------------------------------------------------- | ------- |
+| `qTestTestConfigDBName` | PSQL database name of the qTest manager | `qTest` |
+| `qTestTestConfigDBUser` | PSQL username | `postgres` |
+| `qTestTestConfigDBHost` | PSQL database host name | `host.docker.internal` |
 
 * Once the server is up and running, copy the server id from the Administrator -> license
 * Reach out the tricentis team and provide the server id for license file

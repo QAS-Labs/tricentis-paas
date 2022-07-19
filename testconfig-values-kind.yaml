@@ -1,0 +1,175 @@
+# Default values for qtest-testconfig-chart
+namespace:
+  name: qtest
+
+reloader:
+  enabled: false
+
+secrets:
+  enabled: true
+
+image:
+  repository: 242129367204.dkr.ecr.us-east-1.amazonaws.com/testconfig
+  pullPolicy: IfNotPresent
+  tag: "v1.0.1"
+
+deployment:
+  annotations: {}
+
+service:
+  type: LoadBalancer
+  port: 8080
+  targetPort: 8080
+  targetHttpsPort: 8443
+  serviceName: testconfig-service
+
+qTestTestConfig:
+  qTestTestConfigCatalinaOpts: \"-server -d64 -Xms512m -Xmx2048m -XX:MaxPermSize=256m -XX:CompileThreshold=8000 -XX:-DisableExplicitGC -XX:HeapDumpPath=/logs -Djava.awt.headless=true\"
+  qTestTestConfigDBName: qtest
+  qTestTestConfigDBUser: postgres
+  qTestTestConfigDBHost: postgres.local
+  qTestTestConfigCSRFAllowPattern: \"$testconfig_security_csrf_trusted_source_pattern\"
+  serverAppSSLRequired: false
+  server:
+    sslMountPath: "/mnt/secrets/tls"
+  smtp:
+    server: "smtp.local"
+    account: "qtest"
+
+#### Ingress/IngressClass (> K8s 1.18-1.22+) #####
+ingressClass:
+  enabled: false
+  labels: {}
+  controller: ingress.k8s.aws/alb
+  isDefaultClass: true
+  # Use to force a networking.k8s.io API Version for certain CI/CD applications. Ex. "v1"
+  fallbackApiVersion: ""
+
+ingress:
+  enabled: true
+  name: qtest-testconfig-ingress
+  labels: {}
+  annotations: {}
+  canary:
+    annotationPrefix: ""
+    annotations: {}
+      # canary-by-header: []
+      # canary-by-header-pattern: []
+  hosts:
+    host: testconfig.qtest.local
+
+  paths: []
+
+  extraPaths:
+    - path: /*
+      backendServiceName: testconfig-service
+      pathType: ImplementationSpecific
+      backendPort: 8080
+
+  tls:
+    []
+    # - secretName: qtest-svc-tls
+    #   hosts:
+    #     - svc.qtest.com
+  https: false
+
+persistence:
+  enabled: false
+  ## Set annotations on k8s pvc
+  annotations: {}
+
+  ## Specify an existing volume claim instead of creating a new one.
+  ## When using this option all following options like storageClass, accessMode and size are ignored.
+  ## existingClaim:
+
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  storageClass:
+  accessMode: ReadWriteOnce
+  size: 5Gi
+
+  ## Specify extra volumes. Refer to ".spec.volumes" specification : https://kubernetes.io/fr/docs/concepts/storage/volumes/
+  volumes: []
+  ## Specify extra mounts. Refer to ".spec.containers.volumeMounts" specification : https://kubernetes.io/fr/docs/concepts/storage/volumes/
+  mounts: []
+
+
+  # VPA values
+vpaAutoscaling:
+  enabled: false
+  updatePolicy:
+    updateMode: "Off"
+  resourcePolicy:
+    containerPolicies:
+    - containerName: '*'
+      controlledValues: RequestsAndLimits
+
+# HPA values
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 1
+  livenessProbe:
+    httpGet:
+      path: /health
+      scheme: HTTP
+      port: 8081
+    initialDelaySeconds: 70
+    periodSeconds: 30
+  livenessSslProbe:
+    httpGet:
+      path: /health
+      scheme: HTTPS
+      port: 8443
+    initialDelaySeconds: 70
+    periodSeconds: 30
+  readinessProbe:
+    httpGet:
+      path: /health
+      scheme: HTTP
+      port: 8081
+    initialDelaySeconds: 70
+    periodSeconds: 30
+  readinessSslProbe:
+    httpGet:
+      path: /health
+      scheme: HTTPS
+      port: 8443
+    initialDelaySeconds: 70
+    periodSeconds: 30
+  startupProbe:
+    httpGet:
+      path: /health
+      scheme: HTTP
+      port: 8081
+    initialDelaySeconds: 70
+    periodSeconds: 30
+    failureThreshold: 20
+  startupSslProbe:
+    httpGet:
+      path: /health
+      scheme: HTTPS
+      port: 8443
+    initialDelaySeconds: 70
+    periodSeconds: 30
+    failureThreshold: 20
+  targetCPUUtilizationPercentage: 85
+  targetMemoryUtilizationPercentage: 85
+
+resources:
+  requests:
+    cpu: 1
+    memory: 2Gi
+  limits:
+    cpu: 1
+    memory: 2Gi
+
+limitRange:
+  enabled: false
+
+resourceQuota:
+  enabled: false
